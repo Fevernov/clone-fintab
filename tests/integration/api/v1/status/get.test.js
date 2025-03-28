@@ -9,7 +9,7 @@ test("GET to /api/v1/status should return 200", async () => {
   // end of update
 
   // version of postgres
-  expect(responseBody.dependencies.database.version).toEqual(16.0);
+  expect(responseBody.dependencies.database.version).toEqual("16.0");
   // max connections
   expect(responseBody.dependencies.database.max_connections).toEqual(100);
   // opened connections
