@@ -26,9 +26,18 @@ describe("POST /api/v1/users", () => {
 
       const responseBody = await response.json();
 
+      expect(responseBody).toEqual({
+        id: responseBody.id,
+        username: "filipedeschamps",
+        email: "contato@curso.dev",
+        password: "senha123",
+        created_at: responseBody.created_at,
+        updated_at: responseBody.updated_at,
+      });
+
       expect(uuidVersion(responseBody.id)).toBe(4);
       expect(Date.parse(responseBody.created_at)).not.toBeNaN();
-      expect(Date.parse(responseBody.updated)).not.toBeNaN();
+      expect(Date.parse(responseBody.updated_at)).not.toBeNaN();
     });
 
     test("With duplicated 'email'", async () => {
@@ -60,7 +69,7 @@ describe("POST /api/v1/users", () => {
 
       const responseBody = await response2.json();
 
-      excpect(responseBody).toEqual({
+      expect(responseBody).toEqual({
         name: "ValidationError",
         message: "O email informado já está sendo utilizado.",
         action: "Utilize outro email para realizar o cadastro.",
@@ -97,7 +106,7 @@ describe("POST /api/v1/users", () => {
 
       const responseBody = await response2.json();
 
-      excpect(responseBody).toEqual({
+      expect(responseBody).toEqual({
         name: "ValidationError",
         message: "O username informado já está sendo utilizado.",
         action: "Utilize outro username para realizar o cadastro.",

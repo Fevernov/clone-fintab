@@ -20,7 +20,7 @@ export class InternalServerError extends Error {
 
 export class ServiceError extends Error {
   constructor({ cause, message }) {
-    super(message || "Serviço indisponível no moemnto", {
+    super(message || "Serviço indisponível no momento", {
       cause,
     });
     this.name = "Service Error";
