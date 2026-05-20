@@ -15,18 +15,10 @@ async function listPendingMigrations() {
 
   try {
     dbClient = await database.getNewClient();
-    const defaultMigrationOptions = {
-      dbClient: dbClient,
-      dryRun: true,
-      dir: resolve("infra", "migrations"),
-      direction: "up",
-      verbose: true,
-      migrationsTable: "pgmigrations",
-    };
 
     const pendingMigrations = await migrationRunner({
       ...defaultMigrationOptions,
-      dbClient: dbClient,
+      dbClient,
     });
     return pendingMigrations;
   } finally {
@@ -42,8 +34,8 @@ async function runPendingMigrations() {
 
     const migratedMigrations = await migrationRunner({
       ...defaultMigrationOptions,
+      dbClient,
       dryRun: false,
-      dbClient: dbClient,
     });
 
     return migratedMigrations;

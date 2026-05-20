@@ -1,6 +1,6 @@
 import { createRouter } from "next-connect";
 import controller from "infra/controller.js";
-import migrator from "models/migrator";
+import migrator from "models/migrator.js";
 
 const router = createRouter();
 
@@ -16,6 +16,7 @@ async function getHandler(request, response) {
 
 async function postHandler(request, response) {
   const migratedMigrations = await migrator.runPendingMigrations();
+
   if (migratedMigrations.length > 0) {
     return response.status(201).json(migratedMigrations);
   }

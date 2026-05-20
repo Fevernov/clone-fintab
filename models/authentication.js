@@ -21,6 +21,7 @@ async function getAuthenticatedUser(providedEmail, providedPassword) {
 
   async function findUserByEmail(providedEmail) {
     let storedUser;
+
     try {
       storedUser = await user.findOneByEmail(providedEmail);
     } catch (error) {

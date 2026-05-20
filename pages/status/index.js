@@ -7,30 +7,34 @@ async function fetchAPI(key) {
 }
 
 export default function StatusPage() {
-  const { isLoading, data } = useSWR("/api/v1/status", fetchAPI, {
-    refreshInterval: 2000,
-  });
-
   return (
     <>
-      <h1>STATUS</h1>
-      <UpdatedAt isLoading={isLoading} data={data} />
-      <DatabaseStatus isLoading={isLoading} data={data} />
+      <h1>Status</h1>
+      <UpdatedAt />
+      <DatabaseStatus />
     </>
   );
 }
 
-function UpdatedAt({ isLoading, data }) {
-  let UpdatedAtText = "Carregando...";
+function UpdatedAt() {
+  const { isLoading, data } = useSWR("/api/v1/status", fetchAPI, {
+    refreshInterval: 2000,
+  });
+
+  let updatedAtText = "Carregando...";
 
   if (!isLoading && data) {
-    UpdatedAtText = new Date(data.updated_at).toLocaleString("pt-BR");
+    updatedAtText = new Date(data.updated_at).toLocaleString("pt-BR");
   }
 
-  return <div>Última atualização: {UpdatedAtText}</div>;
+  return <div>Última atualização: {updatedAtText}</div>;
 }
 
-function DatabaseStatus({ isLoading, data }) {
+function DatabaseStatus() {
+  const { isLoading, data } = useSWR("/api/v1/status", fetchAPI, {
+    refreshInterval: 2000,
+  });
+
   let databaseStatusInformation = "Carregando...";
 
   if (!isLoading && data) {
