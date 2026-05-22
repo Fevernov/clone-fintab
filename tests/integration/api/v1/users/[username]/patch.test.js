@@ -1,5 +1,5 @@
-import orchestrator from "tests/orchestrator.js";
 import { version as uuidVersion } from "uuid";
+import orchestrator from "tests/orchestrator.js";
 import user from "models/user.js";
 import password from "models/password.js";
 
@@ -11,13 +11,14 @@ beforeAll(async () => {
 
 describe("PATCH /api/v1/users/[username]", () => {
   describe("Anonymous user", () => {
-    test("With nonexistant 'username'", async () => {
+    test("With nonexistent 'username'", async () => {
       const response = await fetch(
         "http://localhost:3000/api/v1/users/UsuarioInexistente",
         {
           method: "PATCH",
         },
       );
+
       expect(response.status).toBe(404);
 
       const responseBody = await response.json();
@@ -48,6 +49,7 @@ describe("PATCH /api/v1/users/[username]", () => {
           username: "user1",
         }),
       });
+
       expect(response.status).toBe(400);
 
       const responseBody = await response.json();
@@ -81,6 +83,7 @@ describe("PATCH /api/v1/users/[username]", () => {
           }),
         },
       );
+
       expect(response.status).toBe(400);
 
       const responseBody = await response.json();
@@ -94,9 +97,7 @@ describe("PATCH /api/v1/users/[username]", () => {
     });
 
     test("With unique 'username'", async () => {
-      const createdUser = await orchestrator.createUser({
-        username: "uniqueUser1",
-      });
+      const createdUser = await orchestrator.createUser();
 
       const response = await fetch(
         `http://localhost:3000/api/v1/users/${createdUser.username}`,
@@ -110,6 +111,7 @@ describe("PATCH /api/v1/users/[username]", () => {
           }),
         },
       );
+
       expect(response.status).toBe(200);
 
       const responseBody = await response.json();
@@ -131,12 +133,11 @@ describe("PATCH /api/v1/users/[username]", () => {
     });
 
     test("With unique 'email'", async () => {
-      const createdUser = await orchestrator.createUser({
-        email: "uniqueEmail1@curso.dev",
-      });
+      const createdUser = await orchestrator.createUser();
 
       const response = await fetch(
         `http://localhost:3000/api/v1/users/${createdUser.username}`,
+
         {
           method: "PATCH",
           headers: {
@@ -147,6 +148,7 @@ describe("PATCH /api/v1/users/[username]", () => {
           }),
         },
       );
+
       expect(response.status).toBe(200);
 
       const responseBody = await response.json();
@@ -184,6 +186,7 @@ describe("PATCH /api/v1/users/[username]", () => {
           }),
         },
       );
+
       expect(response.status).toBe(200);
 
       const responseBody = await response.json();

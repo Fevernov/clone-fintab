@@ -1,5 +1,5 @@
-import orchestrator from "tests/orchestrator.js";
 import { version as uuidVersion } from "uuid";
+import orchestrator from "tests/orchestrator.js";
 import user from "models/user.js";
 import password from "models/password.js";
 
@@ -68,6 +68,7 @@ describe("POST /api/v1/users", () => {
           password: "senha123",
         }),
       });
+
       expect(response1.status).toBe(201);
 
       const response2 = await fetch("http://localhost:3000/api/v1/users", {
@@ -81,11 +82,12 @@ describe("POST /api/v1/users", () => {
           password: "senha123",
         }),
       });
+
       expect(response2.status).toBe(400);
 
-      const responseBody = await response2.json();
+      const response2Body = await response2.json();
 
-      expect(responseBody).toEqual({
+      expect(response2Body).toEqual({
         name: "ValidationError",
         message: "O email informado já está sendo utilizado.",
         action: "Utilize outro email para realizar esta operação.",
@@ -105,6 +107,7 @@ describe("POST /api/v1/users", () => {
           password: "senha123",
         }),
       });
+
       expect(response1.status).toBe(201);
 
       const response2 = await fetch("http://localhost:3000/api/v1/users", {
@@ -118,11 +121,12 @@ describe("POST /api/v1/users", () => {
           password: "senha123",
         }),
       });
+
       expect(response2.status).toBe(400);
 
-      const responseBody = await response2.json();
+      const response2Body = await response2.json();
 
-      expect(responseBody).toEqual({
+      expect(response2Body).toEqual({
         name: "ValidationError",
         message: "O username informado já está sendo utilizado.",
         action: "Utilize outro username para realizar esta operação.",

@@ -1,4 +1,4 @@
-import orchestrator from "tests/orchestrator";
+import orchestrator from "tests/orchestrator.js";
 
 beforeAll(async () => {
   await orchestrator.waitForAllServices();
@@ -14,7 +14,6 @@ describe("GET /api/v1/migrations", () => {
       const responseBody = await response.json();
 
       expect(Array.isArray(responseBody)).toBe(true);
-
       expect(responseBody.length).toBeGreaterThan(0);
     });
   });

@@ -22,10 +22,9 @@ async function getHandler(request, response) {
 
   const databaseName = process.env.POSTGRES_DB;
   const databaseOpenedConnectionsResult = await database.query({
-    text: "SELECT count(*)::int FROM pg_stat_activity WHERE datname = $1",
+    text: "SELECT count(*)::int FROM pg_stat_activity WHERE datname = $1;",
     values: [databaseName],
   });
-
   const databaseOpenedConnectionsValue =
     databaseOpenedConnectionsResult.rows[0].count;
 

@@ -1,3 +1,3 @@
 # clone-tabnews
 
-A new repository to learn and practice web development from CURSO.DEV with Felipe Deschamps
+implementing https://www.tabnews.com.br with Felipe Deschamps https://curso.dev"
