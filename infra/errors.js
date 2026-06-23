@@ -78,6 +78,7 @@ export class NotFoundError extends Error {
     };
   }
 }
+
 export class UnauthorizedError extends Error {
   constructor({ cause, message, action }) {
     super(message || "Usuário não autenticado.", {
@@ -105,6 +106,27 @@ export class MethodNotAllowedError extends Error {
     this.action =
       "Verifique se o método HTTP enviado é válido para este endpoint.";
     this.statusCode = 405;
+  }
+
+  toJSON() {
+    return {
+      name: this.name,
+      message: this.message,
+      action: this.action,
+      status_code: this.statusCode,
+    };
+  }
+}
+
+export class ForbiddenError extends Error {
+  constructor({ cause, message, action }) {
+    super(message || "Acesso negado.", {
+      cause,
+    });
+    this.name = "UnauthorizedError";
+    this.action =
+      action || "Verifique as fearures necessárias antes de continuar.";
+    this.statusCode = 403;
   }
 
   toJSON() {
