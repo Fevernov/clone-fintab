@@ -78,7 +78,10 @@ Equipe FinTab`,
 }
 
 async function activateUserByUserId(userID) {
-  const activatedUser = await user.setFeatures(userID, ["create:session"]);
+  const activatedUser = await user.setFeatures(userID, [
+    "create:session",
+    "read:session",
+  ]);
   return activatedUser;
 }
 
@@ -107,6 +110,7 @@ const activation = {
   findOneValidById,
   markTokenAsUsed,
   activateUserByUserId,
+  EXPIRATION_IN_MILLISECONDS,
 };
 
 export default activation;
